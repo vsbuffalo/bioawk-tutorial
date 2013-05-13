@@ -64,7 +64,8 @@ tab-delimited table of names and sequence lengths, you could do:
 
     bioawk -cfastx '{print $name, length($seq)}' test-trimmed.fastq
 
-Or maybe you want to see how many sequences are shorter now?
+Or maybe you want to see how many sequences are shorter (less than
+80bp) now?
 
     bioawk -cfastx 'BEGIN{ shorter = 0} {if (length($seq) < 80) shorter += 1} END {print "shorter sequences", shorter}' test-trimmed.fastq
 	
@@ -80,3 +81,4 @@ bioawk can also take other input formats:
         1:seqname 2:source 3:feature 4:start 5:end 6:score 7:filter 8:strand 9:group 10:attribute
     fastx:
     	1:name 2:seq 3:qual 4:comment
+
