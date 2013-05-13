@@ -54,4 +54,29 @@ Bioawk is just like awk, but instead of working with mapping columns
 to variables for you, it maps bioinformatics field formats (like
 FASTA/FASTQ name and sequence).
 
+You can count sequences very effectively with bioawk, because awk
+updates the built-in variable `NR` (number of records):
 
+    bioawk -cfastx 'END{print NR}' test.fastq
+
+But this is just the beginning; what if you wanted to use it to make a
+tab-delimited table of names and sequence lengths, you could do:
+
+    bioawk -cfastx '{print $name, length($seq)}' test-trimmed.fastq
+
+Or maybe you want to see how many sequences are shorter now?
+
+    bioawk -cfastx 'BEGIN{ shorter = 0} {if (length($seq) < 80) shorter += 1} END {print "shorter sequences", shorter}' test-trimmed.fastq
+	
+bioawk can also take other input formats: 
+
+    bed:
+         1:chrom 2:start 3:end 4:name 5:score 6:strand 7:thickstart 8:thickend 9:rgb 10:blockcount 11:blocksizes 12:blockstarts
+    sam:
+        1:qname 2:flag 3:rname 4:pos 5:mapq 6:cigar 7:rnext 8:pnext 9:tlen 10:seq 11:qual
+    vcf:
+        1:chrom 2:pos 3:id 4:ref 5:alt 6:qual 7:filter 8:info
+    gff:
+        1:seqname 2:source 3:feature 4:start 5:end 6:score 7:filter 8:strand 9:group 10:attribute
+    fastx:
+    	1:name 2:seq 3:qual 4:comment
