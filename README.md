@@ -10,7 +10,7 @@ Don't write your own FASTA/FASTQ parsers! FASTA is much easier, but
 *code reuse* is important here. FASTQ is a very hard format to parse
 *safely* and *quickly*. See
 [this post](http://www.biostars.org/p/10353/#11256) for more info on
-how trick it can be to parse FASTQ.
+how tricky it can be to parse FASTQ.
 
 
 Heng Li (author of samtools, bwa) has written a nice set of parsers
